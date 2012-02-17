@@ -1,7 +1,8 @@
-package pl.gtug.szczecin;
+package pl.gtug.szczecin.hackathon;
 
 import android.app.Activity;
 import android.os.Bundle;
+import pl.gtug.szczecin.R;
 
 public class MainActivity extends Activity
 {
