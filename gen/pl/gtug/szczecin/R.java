@@ -11,15 +11,18 @@ public final class R {
     public static final class attr {
     }
     public static final class id {
-        public static final int itemText=0x7f040002;
-        public static final int itemView=0x7f040001;
-        public static final int tasksList=0x7f040000;
+        public static final int itemDescription=0x7f040000;
+        public static final int itemText=0x7f040003;
+        public static final int itemView=0x7f040002;
+        public static final int tasksList=0x7f040001;
     }
     public static final class layout {
-        public static final int main=0x7f020000;
-        public static final int todoitem=0x7f020001;
+        public static final int itemdetails=0x7f020000;
+        public static final int main=0x7f020001;
+        public static final int todoiteminlist=0x7f020002;
     }
     public static final class string {
         public static final int app_name=0x7f030000;
+        public static final int set_location=0x7f030001;
     }
 }
