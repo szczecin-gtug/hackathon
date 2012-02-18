@@ -1,4 +1,4 @@
-package pl.gtug.szczecin.hackathon;
+package pl.gtug.szczecin.hackathon.activities;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;

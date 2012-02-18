@@ -30,6 +30,8 @@ public final class R {
         public static final int menu_preferences=0x7f040002;
         public static final int preference_test=0x7f040003;
         public static final int preference_test_summary=0x7f040004;
+        public static final int proximity_entered=0x7f040005;
+        public static final int proximity_leaved=0x7f040006;
     }
     public static final class xml {
         public static final int preferences=0x7f030000;

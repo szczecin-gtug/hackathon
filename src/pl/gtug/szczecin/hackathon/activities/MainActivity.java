@@ -1,4 +1,4 @@
-package pl.gtug.szczecin.hackathon;
+package pl.gtug.szczecin.hackathon.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import pl.gtug.szczecin.R;
+import pl.gtug.szczecin.hackathon.TodoItem;
 
 public class MainActivity extends Activity
 {
