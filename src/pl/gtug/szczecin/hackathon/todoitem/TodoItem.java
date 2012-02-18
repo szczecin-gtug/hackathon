@@ -1,4 +1,4 @@
-package pl.gtug.szczecin.hackathon;
+package pl.gtug.szczecin.hackathon.todoitem;
 
 /**
  * Created by Pawel Stawicki on 2/18/12 1:36 PM
@@ -23,4 +23,5 @@ public class TodoItem {
     public String toString() {
         return taskDescription;
     }
+
 }

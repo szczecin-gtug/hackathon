@@ -11,12 +11,15 @@ public final class R {
     public static final class attr {
     }
     public static final class id {
-        public static final int itemDescription=0x7f060000;
-        public static final int itemText=0x7f060003;
-        public static final int itemView=0x7f060002;
-        public static final int menuExit=0x7f060005;
-        public static final int menuPreferences=0x7f060004;
-        public static final int tasksList=0x7f060001;
+        public static final int itemDescription=0x7f060002;
+        public static final int itemDetailsView=0x7f060000;
+        public static final int itemText=0x7f060006;
+        public static final int itemTitle=0x7f060001;
+        public static final int itemView=0x7f060005;
+        public static final int menuExit=0x7f060008;
+        public static final int menuPreferences=0x7f060007;
+        public static final int setLocationButton=0x7f060003;
+        public static final int tasksList=0x7f060004;
     }
     public static final class layout {
         public static final int itemdetails=0x7f020000;
