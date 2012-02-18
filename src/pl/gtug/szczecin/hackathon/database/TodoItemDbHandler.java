@@ -8,14 +8,24 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
+@Singleton
 public class TodoItemDbHandler {
 
 	public static final String TODO_TABLE_NAME = "TODO ";
 	
 	public static final String TODO_TABLE_STRUCTURE = "(id INTEGER PRIMARY KEY, description VARCHAR, is_done VARCHAR) ";
 	
-	public List<TodoItem> getTodosList(SQLiteDatabase database) {
-		Cursor todos = database.query(TODO_TABLE_NAME, null, null, null, null, null, "name");
+	@Inject
+	private DbHelper helper;
+	
+	@Inject
+	private LocationDbHandler locationHelper;
+	
+	public List<TodoItem> getTodosList() {
+		Cursor todos = helper.getDatabase().query(TODO_TABLE_NAME, null, null, null, null, null, "name");
 		
 		List<TodoItem> result = new ArrayList<TodoItem>();
 		
@@ -25,7 +35,7 @@ public class TodoItemDbHandler {
 				String description = todos.getString(todos.getColumnIndex("description"));
 				TodoItem todo = new TodoItem(description);				
 				todo.setDoneStatus(todos.getString(todos.getColumnIndex("is_done")).equalsIgnoreCase("y") ? true : false);
-				todo.setLocation(LocationDbHandler.getLocation(database, description));
+				todo.setLocation(locationHelper.getLocation(description));
 				result.add(todo);
 			} while (todos.moveToNext());
 		}
@@ -42,7 +52,7 @@ public class TodoItemDbHandler {
 			do {
 				if (todos.getString(todos.getColumnIndex("name")).equals(description)) {
 					result.setDoneStatus(todos.getString(todos.getColumnIndex("is_done")).equalsIgnoreCase("y") ? true : false);
-					result.setLocation(LocationDbHandler.getLocation(database, description));
+					result.setLocation(locationHelper.getLocation(description));
 					break;
 				}
 			} while (todos.moveToNext());
@@ -51,18 +61,16 @@ public class TodoItemDbHandler {
 		return result;
 	}
 	
-	public void updateDescription(SQLiteDatabase database, String oldValue, String newValue) {
+	public void updateDescription(String oldValue, String newValue) {
 		ContentValues updateValues = new ContentValues();
 		updateValues.put("description", newValue);
-		database.update(TODO_TABLE_NAME, updateValues, "description=" + oldValue, null);
+		helper.getDatabase().update(TODO_TABLE_NAME, updateValues, "description=" + oldValue, null);
 	}
 	
-	
-	
-	public void updateDoneStatus(SQLiteDatabase database, String description, boolean done) {
+	public void updateDoneStatus(String description, boolean done) {
 		ContentValues updateValues = new ContentValues();
 		updateValues.put("is_done", done ? "Y" : "N");
-		database.update(TODO_TABLE_NAME, updateValues, "description=" + description, null);
+		helper.getDatabase().update(TODO_TABLE_NAME, updateValues, "description=" + description, null);
 	}
 	
 }

@@ -2,19 +2,23 @@ package pl.gtug.szczecin.hackathon.database;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
+
+import com.google.inject.Inject;
 
 public class LocationDbHandler {
 
 	public static final String LOCATION_TABLE_NAME = "LOCATION ";
 		
 	public static final String LOCATION_TABLE_STRUCTURE = "(id INTEGER PRIMARY KEY, description VARCHAR, lat DOUBLE, lon DOUBLE) ";
+
+	@Inject
+	private DbHelper helper;
 	
-	public static Location getLocation(SQLiteDatabase database, String todoDesc) {
+	public Location getLocation(String todoDesc) {
 		Location result = null;
 		
-		Cursor locations = database.query(LOCATION_TABLE_NAME, null, null, null, null, null, "name");
+		Cursor locations = helper.getDatabase().query(LOCATION_TABLE_NAME, null, null, null, null, null, "name");
 		
 		if (locations.getCount() > 0) {
 			locations.moveToFirst();
@@ -31,11 +35,11 @@ public class LocationDbHandler {
 		return result;
 	}
 	
-	public static void updateLocation(SQLiteDatabase database, String description, Location newLocation) {
+	public void updateLocation(String description, Location newLocation) {
 		ContentValues updateValues = new ContentValues();
 		updateValues.put("alt", newLocation.getAltitude());
 		updateValues.put("lon", newLocation.getLongitude());
-		database.update(LOCATION_TABLE_NAME, updateValues, "description=" + description, null);
+		helper.getDatabase().update(LOCATION_TABLE_NAME, updateValues, "description=" + description, null);
 	}
 	
 }
