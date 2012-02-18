@@ -24,10 +24,19 @@
             android:name=".hackathon.activities.ItemDetailsActivity"
             />
 
+        <activity
+            android:name=".hackathon.activities.GeneralMapActivity"
+            />
+
         <receiver
             android:name=".hackathon.receivers.ProximityReceiver"
             android:enabled="true"
             />
+
+        <uses-library android:name="com.google.android.maps"/>
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+        <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     </application>
 </manifest> 
