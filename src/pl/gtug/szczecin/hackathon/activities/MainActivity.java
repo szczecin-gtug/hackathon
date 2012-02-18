@@ -73,6 +73,7 @@ public class MainActivity extends RoboActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d(TAG, "onOptionsItemSelected");
+        Intent intent;
 
         switch (item.getItemId()) {
             case R.id.menuExit:
@@ -82,7 +83,13 @@ public class MainActivity extends RoboActivity
 
             case R.id.menuPreferences:
                 Log.i(TAG, "Pressed menu item: preferences");
-                Intent intent = new Intent(this, PreferencesActivity.class);
+                intent = new Intent(this, PreferencesActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.menuMap:
+                Log.i(TAG, "Pressed menu item: map");
+                intent = new Intent(this, GeneralMapActivity.class);
                 startActivity(intent);
                 return true;
         }
