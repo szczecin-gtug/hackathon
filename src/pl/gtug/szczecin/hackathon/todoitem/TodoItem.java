@@ -1,4 +1,4 @@
-package pl.gtug.szczecin.hackathon;
+package pl.gtug.szczecin.hackathon.todoitem;
 
 import android.location.Location;
 
@@ -45,4 +45,5 @@ public class TodoItem {
     public String toString() {
         return taskDescription + " " + getLocation();
     }
+
 }
