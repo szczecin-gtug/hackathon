@@ -27,7 +27,7 @@ public class MainActivity extends Activity
 
         ListView listView = (ListView) findViewById(R.id.tasksList);
 
-        ListAdapter adapter = new ArrayAdapter<TodoItem>(this, R.layout.todoitem, R.id.itemView, new TodoItem[] {
+        ListAdapter adapter = new ArrayAdapter<TodoItem>(this, R.layout.todoiteminlist, R.id.itemView, new TodoItem[] {
                 new TodoItem("asdf"),
                 new TodoItem("asdfasdf"),
                 new TodoItem("sdfasgherghwe Dupa")
