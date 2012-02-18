@@ -25,8 +25,10 @@ public class MainActivity extends Activity
 
         ListView listView = (ListView) findViewById(R.id.tasksList);
 
-        ListAdapter adapter = new ArrayAdapter<String>(this, R.layout.todoitem, R.id.itemView, new String[] {
-                "asdf", "111", "2222"
+        ListAdapter adapter = new ArrayAdapter<TodoItem>(this, R.layout.todoitem, R.id.itemView, new TodoItem[] {
+                new TodoItem("asdf"),
+                new TodoItem("asdfasdf"),
+                new TodoItem("sdfasgherghwe Dupa")
         });
 
         listView.setAdapter(adapter);
