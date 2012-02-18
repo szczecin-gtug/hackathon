@@ -2,4 +2,13 @@
 <resources>
   <string name="app_name">hackathon</string>
   <string name="set_location">Set location</string>
+
+  <string name="menu_exit">Zamknij</string>
+  <string name="menu_preferences">Ustawienia</string>
+
+  <string name="preference_test">Testowy CheckBox</string>
+  <string name="preference_test_summary">Summary</string>
+
+  <string name="proximity_entered">Weszliśmy w zasięg lokalizacji</string>
+  <string name="proximity_leaved">Wyszliśmy z zasięgu lokalizacji</string>
 </resources>
