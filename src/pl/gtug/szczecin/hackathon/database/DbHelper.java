@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 public class DbHelper extends SQLiteOpenHelper {
 
@@ -28,10 +27,10 @@ public class DbHelper extends SQLiteOpenHelper {
 	private static final String FINISH_STMT = ";";
 
     @Inject
-    private static Provider<Context> contextProvider;
+    private static Context contextProvider;
 
 	public DbHelper() {
-		super(contextProvider.get(), DATABASE_NAME, null, DATABASE_VERSION);
+		super(contextProvider, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 	
 	@Override

@@ -1,11 +1,15 @@
 package pl.gtug.szczecin.hackathon.activities;
 
 import android.content.Context;
-import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.TextView;
-import com.google.android.maps.*;
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapActivity;
+import com.google.android.maps.MapController;
+import com.google.android.maps.MapView;
+import com.google.android.maps.Overlay;
+import com.google.android.maps.OverlayItem;
 import pl.gtug.szczecin.R;
 
 import java.util.List;
@@ -26,7 +30,6 @@ public class GeneralMapActivity extends MapActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.map);
-        tv = (TextView) findViewById(R.id.tv1);
         mapView = (MapView) findViewById(R.id.map1);
         mapView.setBuiltInZoomControls(true);
         mc = mapView.getController();
