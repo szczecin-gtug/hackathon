@@ -3,6 +3,9 @@ package pl.gtug.szczecin.hackathon;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -28,4 +31,39 @@ public class MainActivity extends Activity
 
         listView.setAdapter(adapter);
     }
+
+    /**
+     * Podpięcie menu aplikacji pod przycisk telefonu
+     *
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Log.d(TAG, "onCreateOptionsMenu");
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
+    }
+
+    /**
+     * Obsługa elementów menu
+     *
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(TAG, "onOptionsItemSelected");
+
+        switch (item.getItemId()) {
+            case R.id.menuExit:
+                Log.i(TAG, "Pressed menu item: exit");
+                finish();
+                return true;
+        }
+
+        return onOptionsItemSelected(item);
+    }
+
 }
