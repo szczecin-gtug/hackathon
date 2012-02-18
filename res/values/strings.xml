@@ -3,4 +3,8 @@
     <string name="app_name">hackathon</string>
 
     <string name="menu_exit">Zamknij</string>
+    <string name="menu_preferences">Ustawienia</string>
+
+    <string name="preference_test">Testowy CheckBox</string>
+    <string name="preference_test_summary">Summary</string>
 </resources>

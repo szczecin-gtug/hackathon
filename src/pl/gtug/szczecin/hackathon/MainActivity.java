@@ -1,6 +1,7 @@
 package pl.gtug.szczecin.hackathon;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -62,6 +63,12 @@ public class MainActivity extends Activity
             case R.id.menuExit:
                 Log.i(TAG, "Pressed menu item: exit");
                 finish();
+                return true;
+            
+            case R.id.menuPreferences:
+                Log.i(TAG, "Pressed menu item: preferences");
+                Intent intent = new Intent(this, PreferencesActivity.class);
+                startActivity(intent);
                 return true;
         }
 
