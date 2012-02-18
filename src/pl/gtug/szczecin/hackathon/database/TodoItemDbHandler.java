@@ -3,7 +3,7 @@ package pl.gtug.szczecin.hackathon.database;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.gtug.szczecin.hackathon.TodoItem;
+import pl.gtug.szczecin.hackathon.todoitem.TodoItem;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
