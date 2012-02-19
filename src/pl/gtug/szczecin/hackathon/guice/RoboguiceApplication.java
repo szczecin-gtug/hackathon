@@ -14,12 +14,12 @@ public class RoboguiceApplication extends RoboApplication {
 
     @Override
     protected void addApplicationModules(List<Module> modules){
-       modules.add(new AbstractAndroidModule(){
-         @Override
-         protected void configure() {
-           requestStaticInjection(DbHelper.class);
-         }
-       });
+        modules.add(new AbstractAndroidModule(){
+            @Override
+            protected void configure() {
+                requestStaticInjection(DbHelper.class);
+            }
+        });
     }
 
 }

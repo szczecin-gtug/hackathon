@@ -20,26 +20,29 @@ import roboguice.activity.RoboActivity;
 public class ItemDetailsActivity extends RoboActivity {
 
     public static final String SELECTED_ITEM_ID = "selected item id";
+
+    @Inject
+    private DbHelper dbHelper;
     
-    @Inject private DbHelper dbHelper;
-    @Inject private LocationHelper locationHelper;
-    
+    @Inject 
+    private LocationHelper locationHelper;
+
     private TodoItem item;
     private int requestCode = 0;
     private Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);    
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.itemdetails);
 
         final long itemId = getIntent().getLongExtra(SELECTED_ITEM_ID, -1);
-        
+
         item = null;
         if (itemId >= 0) {
-            TextView itemTitleView = (TextView) findViewById(R.id.itemTitle);
             item = dbHelper.getTodoItemDao().load(itemId);
-            itemTitleView.setText(item.getDescription());
+            location = dbHelper.getLocationDao().load(item.getLocationId());
+            showItemDetails();
         }
 
         Button setLocationBtn = (Button) findViewById(R.id.setLocationButton);
@@ -50,17 +53,17 @@ public class ItemDetailsActivity extends RoboActivity {
                 startActivityForResult(intent, requestCode);
             }
         });
-        
+
         Button saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 EditText itemTitle = (EditText) findViewById(R.id.itemTitle);
                 String description = itemTitle.getText().toString();
-                
+
                 if (item == null) {
                     item = new TodoItem();
                 }
-                
+
                 if (location != null) {
                     Long locationId = location.getId();
                     if (locationId != null) {
@@ -68,10 +71,10 @@ public class ItemDetailsActivity extends RoboActivity {
                     } else {
                         locationId = dbHelper.getLocationDao().insert(location);
                     }
-                    
+
                     item.setLocationId(locationId);
                 }
-                
+
                 item.setDescription(description);
 
                 if (item.getId() == null) {
@@ -86,6 +89,20 @@ public class ItemDetailsActivity extends RoboActivity {
         });
     }
 
+    private void showItemDetails() {
+        TextView itemTitleView = (TextView) findViewById(R.id.itemTitle);
+        itemTitleView.setText(item.getDescription());
+
+        showLocation();
+    }
+
+    private void showLocation() {
+        if (location != null) {
+            TextView itemLocationText = (TextView) findViewById(R.id.locationText);
+            itemLocationText.setText("Location: " + location.getLat() + " : " + location.getLon());
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -98,6 +115,8 @@ public class ItemDetailsActivity extends RoboActivity {
             location.setLon(longitude);
             
             locationHelper.addProximityAlert(latitude, longitude);
+            
+            showLocation();
         }
     }
 }

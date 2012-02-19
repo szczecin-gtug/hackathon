@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.google.inject.Inject;
 import pl.gtug.szczecin.R;
 import pl.gtug.szczecin.hackathon.database.DbHelper;
@@ -81,8 +80,6 @@ public class MainActivity extends RoboActivity
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "Click ListItem Number " + position + " id: " + id, Toast.LENGTH_LONG)
-                        .show();
                 Intent intent = new Intent(MainActivity.this, ItemDetailsActivity.class);
                 intent.putExtra(SELECTED_ITEM_ID, todosList.get(position).getId());
                 startActivity(intent);
