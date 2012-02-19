@@ -29,7 +29,8 @@ public class EntitiesGenerator {
         todoItem.addStringProperty(DbHelper.DESCRIPTION).notNull();
         todoItem.addBooleanProperty(DbHelper.IS_DONE).notNull();
         Property locationIdInTodoItem = todoItem.addLongProperty("locationId").getProperty();
-        todoItem.addToOne(location, locationIdInTodoItem);
+
+        location.addToMany(todoItem, locationIdInTodoItem);
     }
 
 }
