@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.inject.Inject;
 import pl.gtug.szczecin.R;
-import pl.gtug.szczecin.hackathon.database.TodoItemDbHandler;
+import pl.gtug.szczecin.hackathon.database.DbHelper;
 import pl.gtug.szczecin.hackathon.database.generated.TodoItem;
 import roboguice.activity.RoboActivity;
 
@@ -33,7 +33,7 @@ public class MainActivity extends RoboActivity
     private static final String TAG = MainActivity.class.getCanonicalName();
 
     @Inject
-    private TodoItemDbHandler todoItemDbHandler;
+    private DbHelper dbHelper;
 
     /** Called when the activity is first created. */
     @Override
@@ -62,7 +62,7 @@ public class MainActivity extends RoboActivity
     private void initiateListView() {
         ListView listView = (ListView) findViewById(R.id.tasksList);
 
-        final List<TodoItem> todosList = todoItemDbHandler.getTodosList();
+        final List<TodoItem> todosList = dbHelper.getTodoItemDao().loadAll();
         ListAdapter adapter = new ArrayAdapter<TodoItem>(this, R.layout.todoiteminlist, R.id.itemView, todosList) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {

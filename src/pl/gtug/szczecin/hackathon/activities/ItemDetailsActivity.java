@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.google.inject.Inject;
 import pl.gtug.szczecin.R;
-import pl.gtug.szczecin.hackathon.database.TodoItemDbHandler;
+import pl.gtug.szczecin.hackathon.database.DbHelper;
 import pl.gtug.szczecin.hackathon.database.generated.TodoItem;
 import roboguice.activity.RoboActivity;
 
@@ -20,7 +20,7 @@ public class ItemDetailsActivity extends RoboActivity {
     public static final String SELECTED_ITEM_ID = "selected item id";
     
     @Inject
-    private TodoItemDbHandler todoItemDbHandler;
+    private DbHelper dbHelper;
     
     private TodoItem item;
 
@@ -34,7 +34,7 @@ public class ItemDetailsActivity extends RoboActivity {
         item = null;
         if (itemId >= 0) {
             TextView itemTitleView = (TextView) findViewById(R.id.itemTitle);
-            item = todoItemDbHandler.getTodoItem(itemId);
+            item = dbHelper.getTodoItemDao().load(itemId);
             itemTitleView.setText(item.getDescription());
         }
         
@@ -51,9 +51,9 @@ public class ItemDetailsActivity extends RoboActivity {
                 item.setDescription(description);
                 
                 if (item.getId() == null) {
-                    todoItemDbHandler.insert(item);
+                    dbHelper.getTodoItemDao().insert(item);
                 } else {
-                    todoItemDbHandler.updateTodoItem(item);
+                    dbHelper.getTodoItemDao().update(item);
                 }
 
                 Intent intent = new Intent(ItemDetailsActivity.this, MainActivity.class);
