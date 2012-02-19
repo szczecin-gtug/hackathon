@@ -46,7 +46,7 @@ public class LocationHelper implements LocationListener {
 
     public void addProximityAlert(double latitude, double longitude) {
         Intent intent = new Intent(Constants.ACTION_PROXIMITY_ALERT);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         locationManager.addProximityAlert(latitude, longitude, Constants.PROXIMITY_ALERT_RADIUS,
                 Constants.PROXIMITY_ALERT_EXPIRATION, pendingIntent);
     }

@@ -36,8 +36,11 @@
 
         <receiver
             android:name=".hackathon.receivers.ProximityReceiver"
-            android:enabled="true"
-            />
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="pl.gtug.szczecin.hackathon.ACTION_PROXIMITY_ALERT"/>
+            </intent-filter>
+        </receiver>
 
     </application>
 </manifest> 
