@@ -4,17 +4,17 @@
     <string name="set_location">Set location</string>
     <string name="ok">OK</string>
 
-    <string name="about">O aplikacji...</string>
-    <string name="about_content">
-        Aplikacja umożliwiająca tworzenie tasków w ramach ToDo listy z opcją przypisania
-        lokalizacji do nich. W momencie znalezienia się w zasięgu jednej z ustalonych lokalizacji,
-        użytkownik zostanie powiadomiony o czekających na niego zadaniach.
-    </string>
+  <string name="menu_exit">Zamknij</string>
+  <string name="menu_preferences">Ustawienia</string>
+  <string name="menu_map">Mapa</string>
+  <string name="about">O aplikacji...</string>
+  <string name="menu_about">O aplikacji</string>
 
-    <string name="menu_exit">Zamknij</string>
-    <string name="menu_preferences">Ustawienia</string>
-    <string name="menu_map">Mapa</string>
-    <string name="menu_about">O aplikacji</string>
+  <string name="about_content">
+    Aplikacja umożliwiająca tworzenie tasków w ramach ToDo listy z opcją przypisania
+    lokalizacji do nich. W momencie znalezienia się w zasięgu jednej z ustalonych lokalizacji,
+    użytkownik zostanie powiadomiony o czekających na niego zadaniach.
+  </string>
 
     <string name="preference_test">Testowy CheckBox</string>
     <string name="preference_test_summary">Summary</string>
@@ -26,5 +26,10 @@
     <string name="center_map_on_current_position">Center map on current position</string>
     <string name="maps_api_key">0JQ3nFEsel4xtCUDnoH5snrhAXCdc-uUWFaHVHg</string>
 
-    <string name="you_are_here">You are here!</string>
+  <string name="you_are_here">You are here!</string>
+  <string name="add_item">Add Todo Item</string>
+  <string name="save">Save</string>
+  <string name="cancel">Cancel</string>
+
+
 </resources>

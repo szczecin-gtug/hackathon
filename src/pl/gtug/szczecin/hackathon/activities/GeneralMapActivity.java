@@ -86,8 +86,9 @@ public class GeneralMapActivity extends MapActivity {
         Intent intent = new Intent(GeneralMapActivity.this, ItemDetailsActivity.class);
         //TODO: tu sie moze wyjebac, bo potrzebuje uzyskac id na podstawie lokacji
         int id = 0;
-        intent.putExtra(ItemDetailsActivity.SELECTED_ITEM, id);
+        intent.putExtra(ItemDetailsActivity.SELECTED_ITEM_ID, id);
         startActivity(intent);
     }
+
 
 }
