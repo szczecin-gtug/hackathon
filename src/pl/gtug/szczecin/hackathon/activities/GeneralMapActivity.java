@@ -27,10 +27,15 @@ public class GeneralMapActivity extends MapActivity {
     private LocationHelper locHelper;
 
     public static Context mContext;
+    private long itemId;
+    private Location userSelectedLocation = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        itemId = getIntent().getLongExtra(ItemDetailsActivity.SELECTED_ITEM_ID, -1);
+        //if no itemId was given, then show all markers for locations
 
         setContentView(R.layout.map);
         centerMapBtn = (Button) findViewById(R.id.center_map_btn);
@@ -51,8 +56,19 @@ public class GeneralMapActivity extends MapActivity {
         });
 
         locHelper = new LocationHelper(this);
+        addMarkerOverlayWithLocations();
 
         centerOnUserPosition();
+    }
+
+    protected void addMarkerOverlayWithLocations()
+    {
+        Drawable marker_blue = this.getResources().getDrawable(R.drawable.marker_green);
+        markerlayer = new MarkerLayer(marker_blue,this, (this.itemId == -1) );
+        markerlayer.addOverlayItem( new OverlayItem(jagiellonska, getString(R.string.you_are_here), "" ));
+        markerlayer.addOverlayItem( new OverlayItem(WiZutPosition, getString(R.string.you_are_here), "" ));
+        markerlayer.addOverlayItem( new OverlayItem(galeriaGryf, getString(R.string.you_are_here), "" ));
+        mapOverlays.add(markerlayer);
     }
 
     @Override
@@ -61,12 +77,7 @@ public class GeneralMapActivity extends MapActivity {
     }
 
     private void centerOnUserPosition() {
-        Drawable marker_blue = this.getResources().getDrawable(R.drawable.marker_green);
-        markerlayer = new MarkerLayer(marker_blue,this);
-        markerlayer.addOverlayItem( new OverlayItem(jagiellonska, getString(R.string.you_are_here), "" ));
-        markerlayer.addOverlayItem( new OverlayItem(WiZutPosition, getString(R.string.you_are_here), "" ));
-        markerlayer.addOverlayItem( new OverlayItem(galeriaGryf, getString(R.string.you_are_here), "" ));
-        mapOverlays.add(markerlayer);
+
 
         mc.setZoom(14);
 
@@ -91,4 +102,7 @@ public class GeneralMapActivity extends MapActivity {
     }
 
 
+    public void setSelectedLocation(Location location) {
+        this.userSelectedLocation = location;
+    }
 }

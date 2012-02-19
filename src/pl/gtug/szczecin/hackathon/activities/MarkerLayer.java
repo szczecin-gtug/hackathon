@@ -1,11 +1,13 @@
 package pl.gtug.szczecin.hackathon.activities;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Toast;
@@ -14,6 +16,7 @@ import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 import pl.gtug.szczecin.R;
+import pl.gtug.szczecin.hackathon.database.DbHelper;
 
 import java.util.ArrayList;
 
@@ -32,9 +35,11 @@ public class MarkerLayer extends ItemizedOverlay {
     private float touched_Y;
     
     private int px_move_acceptance = 10;
+    private boolean isSelectOnly ;
     
-    public MarkerLayer(Drawable defaultMarker,GeneralMapActivity _mapActivity) {
+    public MarkerLayer(Drawable defaultMarker,GeneralMapActivity _mapActivity, boolean locationSelectOnly) {
         super(boundCenterBottom(defaultMarker));
+        this.isSelectOnly = locationSelectOnly;
         mapActivity = _mapActivity;
         populate();
     }
@@ -85,9 +90,27 @@ public class MarkerLayer extends ItemizedOverlay {
                     Log.i(TAG, "New Point");
                     lastUpTime = currentTime;
 
-                    Location newLocation = this.createLocation(p);
-                    //TODO: add location to DB
 
+
+                    if (this.isSelectOnly)
+                    {// location will be returned to previous intent
+                        Intent i = mapActivity.getIntent();
+//                        Bundle b = new Bundle();
+//                        b.putInt(mapActivity.getString(R.string.latitude), p.getLatitudeE6());
+//                        b.putInt(mapActivity.getString(R.string.longitude), p.getLongitudeE6());
+
+                        i.putExtra(DbHelper.LAT, p.getLatitudeE6());
+                        i.putExtra(DbHelper.LON, p.getLongitudeE6());
+//                        i.putExtras(b);
+                        mapActivity.setResult(Activity.RESULT_OK, i);
+                        mapActivity.finish();
+
+                    }
+                    else
+                    {
+                        //TODO: add location to DB
+                        Location newLocation = this.createLocation(p);
+                    }
                     return true;
                 }
             }

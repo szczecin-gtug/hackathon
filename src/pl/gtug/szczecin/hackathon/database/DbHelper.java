@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.google.inject.Inject;
 import pl.gtug.szczecin.hackathon.database.generated.DaoMaster;
 import pl.gtug.szczecin.hackathon.database.generated.DaoSession;
+import pl.gtug.szczecin.hackathon.database.generated.LocationDao;
 import pl.gtug.szczecin.hackathon.database.generated.TodoItemDao;
 
 public class DbHelper extends DaoMaster.DevOpenHelper {
@@ -34,4 +35,13 @@ public class DbHelper extends DaoMaster.DevOpenHelper {
         return todoItemDao;
     }
 
+    public LocationDao getLocationDao() {
+        SQLiteDatabase db = getWritableDatabase();
+
+        DaoMaster master = new DaoMaster(db);
+        DaoSession session = master.newSession();
+        LocationDao locationDao = session.getLocationDao();
+
+        return locationDao;
+    }
 }

@@ -23,6 +23,8 @@
     <string name="proximity_leaved">Wyszliśmy z zasięgu lokalizacji</string>
 
     <string name="text_on_map">Test</string>
+    <string name="latitude">latitude</string>
+    <string name="longitude">longitude</string>
     <string name="center_map_on_current_position">Center map on current position</string>
     <string name="maps_api_key">0JQ3nFEsel4xtCUDnoH5snrhAXCdc-uUWFaHVHg</string>
 
