@@ -2,10 +2,19 @@
 <resources>
   <string name="app_name">hackathon</string>
   <string name="set_location">Set location</string>
+  <string name="ok">OK</string>
 
   <string name="menu_exit">Zamknij</string>
   <string name="menu_preferences">Ustawienia</string>
   <string name="menu_map">Mapa</string>
+  <string name="about">O aplikacji...</string>
+  <string name="menu_about">O aplikacji</string>
+
+  <string name="about_content">
+    Aplikacja umożliwiająca tworzenie tasków w ramach ToDo listy z opcją przypisania
+    lokalizacji do nich. W momencie znalezienia się w zasięgu jednej z ustalonych lokalizacji,
+    użytkownik zostanie powiadomiony o czekających na niego zadaniach.
+  </string>
 
   <string name="preference_test">Testowy CheckBox</string>
   <string name="preference_test_summary">Summary</string>
@@ -21,4 +30,6 @@
   <string name="save">Save</string>
   <string name="cancel">Cancel</string>
 
+
 </resources>
+

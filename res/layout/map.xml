@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.maps.MapView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/map1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:clickable="true"
-        android:apiKey="0JQ3nFEsel4x0oE1EKULYSnb0UTzeHRSRyfNW-g"
-        />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+    <TextView
+            android:id="@+id/tv1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_on_map"
+            />
+    <com.google.android.maps.MapView
+            android:id="@+id/map1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="true"
+            android:enabled="true"
+            android:apiKey="0JQ3nFEsel4xtCUDnoH5snrhAXCdc-uUWFaHVHg"
+            />
+
+</LinearLayout>
