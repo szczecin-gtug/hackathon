@@ -21,7 +21,7 @@ public final class R {
         public static final int itemDetailsView=0x7f070000;
         public static final int itemTitle=0x7f070001;
         public static final int itemView=0x7f070009;
-        public static final int map1=0x7f070008;
+        public static final int map=0x7f070008;
         public static final int menuAbout=0x7f07000c;
         public static final int menuExit=0x7f07000d;
         public static final int menuMap=0x7f07000a;

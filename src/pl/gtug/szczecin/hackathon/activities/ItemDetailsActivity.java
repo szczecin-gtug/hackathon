@@ -47,7 +47,6 @@ public class ItemDetailsActivity extends RoboActivity {
                 Intent intent = new Intent(ItemDetailsActivity.this, GeneralMapActivity.class);
                 intent.putExtra(SELECTED_ITEM_ID, itemId);
                 startActivityForResult(intent, requestCode);
-
             }
         });
         
@@ -86,13 +85,11 @@ public class ItemDetailsActivity extends RoboActivity {
         });
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK)
-        {
-             location = new Location();
+        if (resultCode == RESULT_OK) {
+            location = new Location();
             location.setLat(data.getIntExtra(DbHelper.LAT,0));
             location.setLon(data.getIntExtra(DbHelper.LON,0));
         }

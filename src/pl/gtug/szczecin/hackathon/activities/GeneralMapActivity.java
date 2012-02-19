@@ -1,5 +1,6 @@
 package pl.gtug.szczecin.hackathon.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -9,12 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import com.google.android.maps.*;
 import pl.gtug.szczecin.R;
+import pl.gtug.szczecin.hackathon.database.DbHelper;
 import pl.gtug.szczecin.hackathon.helpers.LocationHelper;
 
 import java.util.List;
 
 public class GeneralMapActivity extends MapActivity {
-    private MapController mc;
+    private MapController mapController;
     private MapView mapView;
     private Button centerMapBtn;
 
@@ -22,11 +24,11 @@ public class GeneralMapActivity extends MapActivity {
     private GeoPoint WiZutPosition = new GeoPoint((int)(53.448749* 1E6), (int) (14.490976 * 1E6)) ;
     private GeoPoint jagiellonska = new GeoPoint((int)(53.433169* 1E6), (int) (14.533805 * 1E6)) ;
     private GeoPoint galeriaGryf= new GeoPoint((int)(53.385491* 1E6), (int) (14.66211 * 1E6)) ;
-    private MarkerLayer markerlayer;
+    private MarkerLayer markerLayer;
 
     private LocationHelper locHelper;
 
-    public static Context mContext;
+    public static Context context;
     private long itemId;
     private Location userSelectedLocation = null;
 
@@ -38,19 +40,20 @@ public class GeneralMapActivity extends MapActivity {
         //if no itemId was given, then show all markers for locations
 
         setContentView(R.layout.map);
-        centerMapBtn = (Button) findViewById(R.id.center_map_btn);
 
-        mapView = (MapView) findViewById(R.id.map1);
+        mapView = (MapView) findViewById(R.id.map);
         mapView.setBuiltInZoomControls(true);
-        mc = mapView.getController();
+        mapController = mapView.getController();
         mapOverlays = mapView.getOverlays();
+
+        centerMapBtn = (Button) findViewById(R.id.center_map_btn);
         centerMapBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View arg0) {
                 Location userPosition = locHelper.getLocation();
                 if (userPosition != null )
                 {
-                    mc.setCenter(new GeoPoint((int)(userPosition.getLatitude() *1e6),(int)(userPosition.getLongitude() *1e6) ));
+                    mapController.setCenter(new GeoPoint((int) (userPosition.getLatitude() * 1e6), (int) (userPosition.getLongitude() * 1e6)));
                 }
             }
         });
@@ -64,11 +67,22 @@ public class GeneralMapActivity extends MapActivity {
     protected void addMarkerOverlayWithLocations()
     {
         Drawable marker_blue = this.getResources().getDrawable(R.drawable.marker_green);
-        markerlayer = new MarkerLayer(marker_blue,this, (this.itemId == -1) );
-        markerlayer.addOverlayItem( new OverlayItem(jagiellonska, getString(R.string.you_are_here), "" ));
-        markerlayer.addOverlayItem( new OverlayItem(WiZutPosition, getString(R.string.you_are_here), "" ));
-        markerlayer.addOverlayItem( new OverlayItem(galeriaGryf, getString(R.string.you_are_here), "" ));
-        mapOverlays.add(markerlayer);
+        markerLayer = new MarkerLayer(marker_blue, (this.itemId == -1), getApplicationContext());
+        markerLayer.addOverlayItem(new OverlayItem(jagiellonska, getString(R.string.you_are_here), ""));
+        markerLayer.addOverlayItem(new OverlayItem(WiZutPosition, getString(R.string.you_are_here), ""));
+        markerLayer.addOverlayItem(new OverlayItem(galeriaGryf, getString(R.string.you_are_here), ""));
+        markerLayer.setOnLocationSetListener(new MarkerLayer.OnLocationSetListener() {
+            @Override
+            public void onLocationSet(Location location) {
+                Intent intent = getIntent();
+                intent.putExtra(DbHelper.LAT, location.getLatitude());
+                intent.putExtra(DbHelper.LON, location.getLongitude());
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+
+            }
+        });
+        mapOverlays.add(markerLayer);
     }
 
     @Override
@@ -77,18 +91,13 @@ public class GeneralMapActivity extends MapActivity {
     }
 
     private void centerOnUserPosition() {
-
-
-        mc.setZoom(14);
+        mapController.setZoom(14);
 
         Location userPosition = locHelper.getLocation();
-        if (userPosition != null )
-        {
-            mc.setCenter(new GeoPoint((int)(userPosition.getLatitude() *1e6),(int)(userPosition.getLongitude() *1e6) ));
-        }
-        else
-        {
-            mc.setCenter(galeriaGryf);
+        if (userPosition != null ) {
+            mapController.setCenter(new GeoPoint((int) (userPosition.getLatitude() * 1e6), (int) (userPosition.getLongitude() * 1e6)));
+        } else {
+            mapController.setCenter(galeriaGryf);
         }
     }
 
@@ -100,7 +109,6 @@ public class GeneralMapActivity extends MapActivity {
         intent.putExtra(ItemDetailsActivity.SELECTED_ITEM_ID, id);
         startActivity(intent);
     }
-
 
     public void setSelectedLocation(Location location) {
         this.userSelectedLocation = location;

@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-        >
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
     <Button android:id="@+id/center_map_btn"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/center_map_on_current_position"
-            />
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/center_map_on_current_position"
+        />
 
     <com.google.android.maps.MapView
-            android:id="@+id/map1"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:clickable="true"
-            android:enabled="true"
-            android:apiKey="0JQ3nFEsel4xtCUDnoH5snrhAXCdc-uUWFaHVHg"
-            />
-
-
+        android:id="@+id/map"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true"
+        android:enabled="true"
+        android:apiKey="0JQ3nFEsel4xtCUDnoH5snrhAXCdc-uUWFaHVHg"
+        />
 
 </LinearLayout>
