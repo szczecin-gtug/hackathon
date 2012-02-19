@@ -20,7 +20,8 @@ public final class R {
         public static final int itemTitle=0x7f070001;
         public static final int itemView=0x7f070006;
         public static final int map1=0x7f070005;
-        public static final int menuExit=0x7f07000a;
+        public static final int menuAbout=0x7f07000a;
+        public static final int menuExit=0x7f07000b;
         public static final int menuMap=0x7f070008;
         public static final int menuPreferences=0x7f070009;
         public static final int setLocationButton=0x7f070003;
@@ -36,18 +37,22 @@ public final class R {
         public static final int main=0x7f060000;
     }
     public static final class string {
+        public static final int about=0x7f050003;
+        public static final int about_content=0x7f050004;
         public static final int app_name=0x7f050000;
-        public static final int maps_api_key=0x7f05000a;
-        public static final int menu_exit=0x7f050002;
-        public static final int menu_map=0x7f050004;
-        public static final int menu_preferences=0x7f050003;
-        public static final int preference_test=0x7f050005;
-        public static final int preference_test_summary=0x7f050006;
-        public static final int proximity_entered=0x7f050007;
-        public static final int proximity_leaved=0x7f050008;
+        public static final int maps_api_key=0x7f05000e;
+        public static final int menu_about=0x7f050008;
+        public static final int menu_exit=0x7f050005;
+        public static final int menu_map=0x7f050007;
+        public static final int menu_preferences=0x7f050006;
+        public static final int ok=0x7f050002;
+        public static final int preference_test=0x7f050009;
+        public static final int preference_test_summary=0x7f05000a;
+        public static final int proximity_entered=0x7f05000b;
+        public static final int proximity_leaved=0x7f05000c;
         public static final int set_location=0x7f050001;
-        public static final int text_on_map=0x7f050009;
-        public static final int you_are_here=0x7f05000b;
+        public static final int text_on_map=0x7f05000d;
+        public static final int you_are_here=0x7f05000f;
     }
     public static final class xml {
         public static final int preferences=0x7f040000;

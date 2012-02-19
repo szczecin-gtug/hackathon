@@ -1,5 +1,7 @@
 package pl.gtug.szczecin.hackathon.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,11 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.*;
 import com.google.inject.Inject;
 import pl.gtug.szczecin.R;
 import pl.gtug.szczecin.hackathon.todoitem.Provider;
@@ -41,8 +39,7 @@ public class MainActivity extends RoboActivity
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "Click ListItem Number " + position + " id: " + id, Toast.LENGTH_LONG)
-                        .show();
+                Toast.makeText(getApplicationContext(), "Click ListItem Number " + position + " id: " + id, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MainActivity.this, ItemDetailsActivity.class);
                 intent.putExtra(ItemDetailsActivity.SELECTED_ITEM, position);
                 startActivity(intent);
@@ -76,9 +73,10 @@ public class MainActivity extends RoboActivity
         Intent intent;
 
         switch (item.getItemId()) {
-            case R.id.menuExit:
-                Log.i(TAG, "Pressed menu item: exit");
-                finish();
+            case R.id.menuMap:
+                Log.i(TAG, "Pressed menu item: map");
+                intent = new Intent(this, GeneralMapActivity.class);
+                startActivity(intent);
                 return true;
 
             case R.id.menuPreferences:
@@ -87,10 +85,22 @@ public class MainActivity extends RoboActivity
                 startActivity(intent);
                 return true;
 
-            case R.id.menuMap:
-                Log.i(TAG, "Pressed menu item: map");
-                intent = new Intent(this, GeneralMapActivity.class);
-                startActivity(intent);
+            case R.id.menuAbout:
+                Log.i(TAG, "Pressed menu item: about");
+                AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                alertDialog.setTitle(getString(R.string.about));
+                alertDialog.setMessage(getString(R.string.about_content));
+                alertDialog.setButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                });
+                alertDialog.show();
+                return true;
+
+            case R.id.menuExit:
+                Log.i(TAG, "Pressed menu item: exit");
+                finish();
                 return true;
         }
 
