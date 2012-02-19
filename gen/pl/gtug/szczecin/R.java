@@ -15,6 +15,7 @@ public final class R {
         public static final int marker_green=0x7f020001;
     }
     public static final class id {
+        public static final int center_map_btn=0x7f070005;
         public static final int itemDescription=0x7f070002;
         public static final int itemDetailsView=0x7f070000;
         public static final int itemText=0x7f070008;
@@ -27,7 +28,6 @@ public final class R {
         public static final int menuPreferences=0x7f07000a;
         public static final int setLocationButton=0x7f070003;
         public static final int tasksList=0x7f070004;
-        public static final int tv1=0x7f070005;
     }
     public static final class layout {
         public static final int itemdetails=0x7f030000;
@@ -42,7 +42,8 @@ public final class R {
         public static final int about=0x7f050003;
         public static final int about_content=0x7f050004;
         public static final int app_name=0x7f050000;
-        public static final int maps_api_key=0x7f05000e;
+        public static final int center_map_on_current_position=0x7f05000e;
+        public static final int maps_api_key=0x7f05000f;
         public static final int menu_about=0x7f050008;
         public static final int menu_exit=0x7f050005;
         public static final int menu_map=0x7f050007;
@@ -54,7 +55,7 @@ public final class R {
         public static final int proximity_leaved=0x7f05000c;
         public static final int set_location=0x7f050001;
         public static final int text_on_map=0x7f05000d;
-        public static final int you_are_here=0x7f05000f;
+        public static final int you_are_here=0x7f050010;
     }
     public static final class xml {
         public static final int preferences=0x7f040000;

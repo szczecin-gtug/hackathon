@@ -3,7 +3,9 @@ package pl.gtug.szczecin.hackathon.activities;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Toast;
@@ -11,9 +13,9 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
+import pl.gtug.szczecin.R;
 
 import java.util.ArrayList;
-
 
 public class MarkerLayer extends ItemizedOverlay {
 
@@ -22,13 +24,18 @@ public class MarkerLayer extends ItemizedOverlay {
 
     private long lastDownTime = -1;
     private long lastUpTime = -1;
-    private final static int QUICK_TAP_MS = 250;
+    private final static int QUICK_TAP_MS = 200;
     private final static int DOUBLE_CLICK_MS = 450;
-    private  Context mContext;
+    private GeneralMapActivity mapActivity;
+
+    private float touched_X;
+    private float touched_Y;
     
-    public MarkerLayer(Drawable defaultMarker, Context context) {
+    private int px_move_acceptance = 10;
+    
+    public MarkerLayer(Drawable defaultMarker,GeneralMapActivity _mapActivity) {
         super(boundCenterBottom(defaultMarker));
-        mContext = context;
+        mapActivity = _mapActivity;
         populate();
     }
 
@@ -60,26 +67,42 @@ public class MarkerLayer extends ItemizedOverlay {
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             lastDownTime = currentTime;
+            touched_X = event.getX();
+            touched_Y = event.getY();
         }
 
-        if (event.getAction() == MotionEvent.ACTION_UP) { //when user lifts his finger very quickly
-            if ( currentTime - lastDownTime < QUICK_TAP_MS) {
-                if (currentTime - lastUpTime > DOUBLE_CLICK_MS)  //coby nie obslugiwac double click'ow
+        else if (event.getAction() == MotionEvent.ACTION_UP) { //when user lifts his finger very quickly
+            if ( currentTime - lastDownTime < QUICK_TAP_MS && currentTime - lastUpTime > DOUBLE_CLICK_MS) //coby nie obslugiwac double click'ow
+            {
+                if ( event.getX() - touched_X < px_move_acceptance &&  event.getX() - touched_X > -px_move_acceptance   &&
+                        event.getY() - touched_Y <px_move_acceptance &&  event.getY() - touched_Y > -px_move_acceptance )
                 {
                     GeoPoint p = mapView.getProjection().fromPixels((int) event.getX(), (int) event.getY());
-                    Toast.makeText(this.mContext,
+                    Toast.makeText(this.mapActivity,
                             p.getLatitudeE6() / 1E6 + "," + p.getLongitudeE6() /1E6 ,
                             Toast.LENGTH_SHORT)
                             .show();
                     Log.i(TAG, "New Point");
-                    //TODO: create new location here
-
                     lastUpTime = currentTime;
+
+                    Location newLocation = this.createLocation(p);
+                    //TODO: add location to DB
+
                     return true;
                 }
             }
         }
         return super.onTouchEvent(event,mapView );
+    }
+
+    protected Location createLocation(GeoPoint point)
+    {
+        float latitude = point.getLatitudeE6() / 1E6F;
+        float longitude = point.getLongitudeE6() / 1E6F;
+        Location location = new Location(this.mapActivity.getString(R.string.app_name));
+        location.setLatitude(latitude);
+        location.setLongitude(longitude);
+        return location;
     }
 
     /***
@@ -90,10 +113,18 @@ public class MarkerLayer extends ItemizedOverlay {
     @Override
     protected boolean onTap(int index) {
         Log.i(TAG, "Marker clicked");
+
+        showTestDialog(mOverlays.get(index));
+        showTodoItemInfo (mOverlays.get(index));
         //TODO: Show existing location todo-list
+        return true;
+    }
+    
+    private void showTestDialog (OverlayItem item)
+    {
         AlertDialog.Builder dialog = new AlertDialog.Builder(GeneralMapActivity.mContext);
-        dialog.setTitle(mOverlays.get(index).getTitle());
-        dialog.setMessage(mOverlays.get(index).getSnippet());
+        dialog.setTitle(item.getTitle());
+        dialog.setMessage(item.getSnippet());
 
         dialog.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
             //on click listener on the alert box
@@ -103,7 +134,13 @@ public class MarkerLayer extends ItemizedOverlay {
         });
 
         dialog.show();
-        return true;
+    }
+    
+    private void showTodoItemInfo(OverlayItem marker)
+    {
+        Location loc = createLocation(marker.getPoint());
+        mapActivity.showItemDetails (loc);
+        //TODO: get ITEM info for location
     }
 
 
