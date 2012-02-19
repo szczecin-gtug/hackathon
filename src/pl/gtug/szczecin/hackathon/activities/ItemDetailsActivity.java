@@ -11,6 +11,7 @@ import pl.gtug.szczecin.R;
 import pl.gtug.szczecin.hackathon.database.DbHelper;
 import pl.gtug.szczecin.hackathon.database.generated.Location;
 import pl.gtug.szczecin.hackathon.database.generated.TodoItem;
+import pl.gtug.szczecin.hackathon.helpers.LocationHelper;
 import roboguice.activity.RoboActivity;
 
 /**
@@ -20,8 +21,8 @@ public class ItemDetailsActivity extends RoboActivity {
 
     public static final String SELECTED_ITEM_ID = "selected item id";
     
-    @Inject
-    private DbHelper dbHelper;
+    @Inject private DbHelper dbHelper;
+    @Inject private LocationHelper locationHelper;
     
     private TodoItem item;
     private int requestCode = 0;
@@ -89,9 +90,14 @@ public class ItemDetailsActivity extends RoboActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
+            double latitude = data.getDoubleExtra(DbHelper.LAT, 0);
+            double longitude = data.getDoubleExtra(DbHelper.LON, 0);
+            
             location = new Location();
-            location.setLat(data.getIntExtra(DbHelper.LAT,0));
-            location.setLon(data.getIntExtra(DbHelper.LON,0));
+            location.setLat(latitude);
+            location.setLon(longitude);
+            
+            locationHelper.addProximityAlert(latitude, longitude);
         }
     }
 }
