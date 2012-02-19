@@ -5,13 +5,27 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent">
-  <TextView android:id="@+id/itemTitle"
+  <EditText android:id="@+id/itemTitle"
             android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:text="@+id/itemDescription" />
+            android:layout_width="fill_parent" />
   <Button android:id="@+id/setLocationButton"
           android:layout_height="wrap_content"
           android:layout_width="wrap_content"
           android:text="@string/set_location" />
+  <LinearLayout android:id="@+id/itemDetailsView"
+                android:orientation="horizontal"
+                android:gravity="bottom"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+    <Button android:id="@+id/saveButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/save" />
+    <Button android:id="@+id/cancelButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/cancel" />
+  </LinearLayout>
+
 
 </LinearLayout>

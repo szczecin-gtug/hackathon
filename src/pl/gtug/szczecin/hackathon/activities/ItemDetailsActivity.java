@@ -1,12 +1,15 @@
 package pl.gtug.szczecin.hackathon.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import com.google.inject.Inject;
 import pl.gtug.szczecin.R;
-import pl.gtug.szczecin.hackathon.todoitem.Provider;
-import pl.gtug.szczecin.hackathon.todoitem.TodoItem;
+import pl.gtug.szczecin.hackathon.database.TodoItemDbHandler;
+import pl.gtug.szczecin.hackathon.database.generated.TodoItem;
 import roboguice.activity.RoboActivity;
 
 /**
@@ -14,23 +17,48 @@ import roboguice.activity.RoboActivity;
  */
 public class ItemDetailsActivity extends RoboActivity {
 
-    public static final String SELECTED_ITEM = "selected item";
+    public static final String SELECTED_ITEM_ID = "selected item id";
     
     @Inject
-    private Provider provider;
+    private TodoItemDbHandler todoItemDbHandler;
+    
+    private TodoItem item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);    
         setContentView(R.layout.itemdetails);
 
-        View itemDetails = findViewById(R.id.itemDetailsView);
-        int position = getIntent().getIntExtra(SELECTED_ITEM, 0);
-
-        TextView itemTitleView = (TextView) findViewById(R.id.itemTitle);
+        long itemId = getIntent().getLongExtra(SELECTED_ITEM_ID, -1);
         
-        TodoItem item = provider.getItems().get(position);
+        item = null;
+        if (itemId >= 0) {
+            TextView itemTitleView = (TextView) findViewById(R.id.itemTitle);
+            item = todoItemDbHandler.getTodoItem(itemId);
+            itemTitleView.setText(item.getDescription());
+        }
+        
+        Button saveButton = (Button) findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                EditText itemTitle = (EditText) findViewById(R.id.itemTitle);
+                String description = itemTitle.getText().toString();
+                
+                if (item == null) {
+                    item = new TodoItem();
+                }
+                
+                item.setDescription(description);
+                
+                if (item.getId() == null) {
+                    todoItemDbHandler.insert(item);
+                } else {
+                    todoItemDbHandler.updateTodoItem(item);
+                }
 
-        itemTitleView.setText(item.getTaskDescription());
+                Intent intent = new Intent(ItemDetailsActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
