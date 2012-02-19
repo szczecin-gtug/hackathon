@@ -8,6 +8,9 @@
   <EditText android:id="@+id/itemTitle"
             android:layout_height="wrap_content"
             android:layout_width="fill_parent" />
+  <TextView android:id="@+id/locationText"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent" />
   <Button android:id="@+id/setLocationButton"
           android:layout_height="wrap_content"
           android:layout_width="wrap_content"

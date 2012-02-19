@@ -2,12 +2,10 @@ package pl.gtug.szczecin.hackathon.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Toast;

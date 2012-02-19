@@ -45,7 +45,6 @@ public class GeneralMapActivity extends MapActivity {
         mc = mapView.getController();
         mapOverlays = mapView.getOverlays();
         centerMapBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
             public void onClick(View arg0) {
                 Location userPosition = locHelper.getLocation();
                 if (userPosition != null )
@@ -64,7 +63,7 @@ public class GeneralMapActivity extends MapActivity {
     protected void addMarkerOverlayWithLocations()
     {
         Drawable marker_blue = this.getResources().getDrawable(R.drawable.marker_green);
-        markerlayer = new MarkerLayer(marker_blue,this, (this.itemId == -1) );
+        markerlayer = new MarkerLayer(marker_blue, this, true);
         markerlayer.addOverlayItem( new OverlayItem(jagiellonska, getString(R.string.you_are_here), "" ));
         markerlayer.addOverlayItem( new OverlayItem(WiZutPosition, getString(R.string.you_are_here), "" ));
         markerlayer.addOverlayItem( new OverlayItem(galeriaGryf, getString(R.string.you_are_here), "" ));

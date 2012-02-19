@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">hackathon</string>
-    <string name="set_location">Set location</string>
-    <string name="ok">OK</string>
+  <string name="app_name">hackathon</string>
+  <string name="set_location">Set location</string>
+  <string name="ok">OK</string>
 
   <string name="menu_exit">Zamknij</string>
   <string name="menu_preferences">Ustawienia</string>
@@ -16,22 +16,21 @@
     użytkownik zostanie powiadomiony o czekających na niego zadaniach.
   </string>
 
-    <string name="preference_test">Testowy CheckBox</string>
-    <string name="preference_test_summary">Summary</string>
+  <string name="preference_test">Testowy CheckBox</string>
+  <string name="preference_test_summary">Summary</string>
 
-    <string name="proximity_entered">Weszliśmy w zasięg lokalizacji</string>
-    <string name="proximity_leaved">Wyszliśmy z zasięgu lokalizacji</string>
+  <string name="proximity_entered">Weszliśmy w zasięg lokalizacji</string>
+  <string name="proximity_leaved">Wyszliśmy z zasięgu lokalizacji</string>
 
-    <string name="text_on_map">Test</string>
-    <string name="latitude">latitude</string>
-    <string name="longitude">longitude</string>
-    <string name="center_map_on_current_position">Center map on current position</string>
-    <string name="maps_api_key">0JQ3nFEsel4xtCUDnoH5snrhAXCdc-uUWFaHVHg</string>
+  <string name="text_on_map">Test</string>
+  <string name="latitude">latitude</string>
+  <string name="longitude">longitude</string>
+  <string name="center_map_on_current_position">Center map on current position</string>
+  <string name="maps_api_key">0JQ3nFEsel4xtCUDnoH5snrhAXCdc-uUWFaHVHg</string>
 
   <string name="you_are_here">You are here!</string>
   <string name="add_item">Add Todo Item</string>
   <string name="save">Save</string>
   <string name="cancel">Cancel</string>
-
 
 </resources>
